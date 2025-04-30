@@ -2,123 +2,203 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>I love Anton 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morsecode für Melina WA Profil</title>
   <style>
-      body {
-      background: pink; /* Hintergrundfarbe geändert */
-      color: white;
-      text-align: center;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      overflow-x: hidden;
+    body {
       margin: 0;
       padding: 0;
-    }    
-    
-    h1 {
-      font-size: 50px;
-      margin-top: 20vh;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      color: white;
+      font-family: 'Courier New', monospace;
+      font-size: 2rem;
+      overflow: hidden;
     }
-
-    h1, h2, p {
-      animation: rainbow 5s infinite linear, wobble 2s infinite;
-      margin: 30px;
-    }
-
-    @keyframes rainbow {
-      0%{color: red;}
-      14%{color: orange;}
-      28%{color: yellow;}
-      42%{color: green;}
-      57%{color: blue;}
-      71%{color: indigo;}
-      85%{color: violet;}
-      100%{color: red;}
-    }
-
-    @keyframes wobble {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(3deg); }
-      50% { transform: rotate(-3deg); }
-      75% { transform: rotate(2deg); }
-    }
-
-    .heart {
+    .morse-background {
       position: absolute;
-      width: 50px;
-      height: 50px;
-      background: pink;
-      transform: rotate(45deg);
-      animation: float 6s infinite ease-in-out;
-      opacity: 0.8;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background: pink;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -25px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -25px;
-      top: 0;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); }
-      50% { transform: translateY(-50px) rotate(45deg); }
-      100% { transform: translateY(0) rotate(45deg); }
-    }
-
-    .glitter {
-      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      background-image: url('https://i.gifer.com/7efs.gif'); /* Glitzer-GIF */
-      background-repeat: repeat;
-      opacity: 0.3;
+      background-color: black;
+      z-index: -1;
+      transition: background-color 0.1s ease-in-out; /* Für sanftes Wechseln der Hintergrundfarbe */
+    }
+    .morse-message {
       z-index: 1;
+      position: relative;
+        font-size: 3rem;
     }
 
-    .content {
-      position: relative;
-      z-index: 2;
-      padding: 50px;
+    .gif {
+      position: absolute;
+      display: block;
+      opacity: 0.8;
+      animation: move 10s infinite linear;
+    }
+
+    @keyframes move {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(20vw, 20vh); }
+      100% { transform: translate(0, 0); }
     }
   </style>
 </head>
 <body>
 
-<div class="glitter"></div>
+<div class="morse-message">Gar nicht mal so schlecht. Bisher...</div>
+<div class="morse-background"></div>
 
-<div class="content">
-  <h1>I love Anton 💖</h1>
-  <h2>Anton + Melina = ❤️</h2>
-  <p>Love and Peace 4life ✌️✨</p>
-</div>
+<div style="position: absolute; top: 700px; left: 200px; color: rgb(247, 0, 255);">
+    Ob du heute richtig stehst, siehst du wenn das Licht angeht.
+  </div>
 
-<!-- Viele kleine Herzen -->
+<div style="position: absolute; top: 500px; left: 80px; color: rgb(128, 215, 196);">
+    cmd + r = reload 
+  </div>  
+
+<div style="position: absolute; top: 100px; left: 1000px; color: rgb(255, 244, 44);">
+    dütdütdüüüt
+  </div> 
+  
+<div style="position: absolute; top: 80px; left: 250px; color: rgb(87, 218, 100);">
+    SOS
+  </div>  
+
 <script>
-  for (let i = 0; i < 20; i++) {
-    let heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.style.top = Math.random() * window.innerHeight + 'px';
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.background = `hsl(${Math.random() * 360}, 100%, 75%)`;
-    heart.style.animationDelay = Math.random() * 5 + 's';
-    document.body.appendChild(heart);
+  // Morsecode für "Melina WA Profil"
+  const morseCode = [
+    '--',    // M
+    '.',     // E
+    '.-..',  // L
+    '..',    // I
+    '-.',    // N
+    '.-',    // A
+    '.--',   // W
+    '.-',    // A
+    '.--.',  // P
+    '.-.',   // R
+    '---',   // O
+    '..-.',  // F
+    '..',    // I
+    '.-..',  // L
+  ];
+
+  const dotDuration = 300; // Dauer eines "Punkts" in Millisekunden
+  const dashDuration = dotDuration * 3; // Dauer eines "Strichs"
+  const pauseDuration = dotDuration * 7; // Pause zwischen den Buchstaben
+
+  const morseBackground = document.querySelector('.morse-background');
+
+  // Funktion zum Wechseln der Hintergrundfarbe
+  function blinkMorseCode() {
+  let timeElapsed = 0;
+
+  morseCode.forEach(letter => {
+    for (let i = 0; i < letter.length; i++) {
+      const symbol = letter[i];
+
+      if (symbol === '.') {
+        setTimeout(() => {
+          morseBackground.style.backgroundColor = 'white';
+        }, timeElapsed);
+        timeElapsed += dotDuration;
+      }
+
+      if (symbol === '-') {
+        setTimeout(() => {
+          morseBackground.style.backgroundColor = 'white';
+        }, timeElapsed);
+        timeElapsed += dashDuration;
+      }
+
+      // Danach Hintergrund wieder schwarz
+      setTimeout(() => {
+        morseBackground.style.backgroundColor = 'black';
+      }, timeElapsed);
+
+      // Nach jedem Punkt/Strich kleine Pause (Pause zwischen Symbolen)
+      timeElapsed += dotDuration;
+    }
+
+    // Nach einem ganzen Buchstaben: 4 Sekunden Pause
+    timeElapsed += 4000;
+  });
+
+  // Wiederhole die Animation
+  setTimeout(blinkMorseCode, timeElapsed);
+}
+
+  // Starte das Blinken
+  blinkMorseCode();
+
+  // GIFs
+  const gifs = [
+    "https://www.icegif.com/wp-content/uploads/2024/03/shrek-icegif-2.gif",
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTZqcGFtcjBsNWQwaXMwaDR0M3NjcjA2OXo1MGR3a2docXNqd2J6MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MS3XuWjQV1FiU/giphy.gif",
+    "https://usagif.com/wp-content/uploads/upgifsok/party-70.gif",
+    "https://viralviralvideos.com/wp-content/uploads/GIF/2014/10/Dance-Party-GIF.gif",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWM3cTVjemdhaGcxNXppcWNibjVhN2NxOGg2YnYxbHc2ZHdvdWxkYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11esEK70pwl5C0/giphy.gif",
+    "https://c.tenor.com/0Fck2nN6ZloAAAAC/dance-funny.gif",
+    "https://media.tenor.com/o5_IiWpa1MIAAAAC/happy-rave.gif",
+    "https://usagif.com/wp-content/uploads/upgifsok/party-73.gif",
+    "https://media.tenor.com/ZNkB10TxqMYAAAAC/carrot-funny.gif",
+    "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXEzZnFwN3c4dzJ4MjdxMTk0anFsd2hieWd1NDIxbXRkcG44NmhxMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yidUzEKG4AaHWCpsPu/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjdjZjJ2a3Q0enh6ZzZkajAzb2YzajgxNnJ0MG80M3NqOWFjNms0ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tFSqMSMnzPRTAdvKyr/giphy.gif",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTU4MGZudm80ODlkcTFqd2JvZmk5ajBndnJxbnlwbHc2Zmpzb3d3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kyLYXonQYYfwYDIeZl/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjdjZjJ2a3Q0enh6ZzZkajAzb2YzajgxNnJ0MG80M3NqOWFjNms0ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tFSqMSMnzPRTAdvKyr/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjdjZjJ2a3Q0enh6ZzZkajAzb2YzajgxNnJ0MG80M3NqOWFjNms0ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KzDqC8LvVC4lshCcGK/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjdjZjJ2a3Q0enh6ZzZkajAzb2YzajgxNnJ0MG80M3NqOWFjNms0ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/s2qXK8wAvkHTO/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjdjZjJ2a3Q0enh6ZzZkajAzb2YzajgxNnJ0MG80M3NqOWFjNms0ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/13Iu9mjLpXF0ek/giphy.gif",
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjdjZjJ2a3Q0enh6ZzZkajAzb2YzajgxNnJ0MG80M3NqOWFjNms0ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1GrsfWBDiTN60/giphy.gif"
+  ];
+
+  // Anzahl der GIFs, die angezeigt werden sollen (8 zufällige GIFs)
+  const numGifs = 8;
+
+  // Zufällige Auswahl von GIFs
+  function getRandomGifs() {
+    const shuffled = gifs.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, numGifs);
   }
+
+  // Generiere zufällige Positionen und füge GIFs hinzu
+  function generateRandomPosition(size) {
+  const width = window.innerWidth - size; // Bildschirmbreite minus GIF-Größe
+  const height = window.innerHeight - size; // Bildschirmhöhe minus GIF-Größe
+  const randomX = Math.random() * width;
+  const randomY = Math.random() * height;
+  return { x: randomX, y: randomY };
+}
+
+function generateRandomSize() {
+  const minSize = 100; // Kleinste Größe des GIFs
+  const maxSize = 500; // Größte Größe des GIFs
+  return Math.random() * (maxSize - minSize) + minSize;
+}
+
+function placeGif(gifUrl) {
+  const size = generateRandomSize();
+  const { x, y } = generateRandomPosition(size);
+  const img = document.createElement('img');
+  img.src = gifUrl;
+  img.classList.add('gif');
+  img.style.width = `${size}px`;
+  img.style.height = `${size}px`;
+  img.style.left = `${x}px`;
+  img.style.top = `${y}px`;
+  document.body.appendChild(img);
+}
+
+// Zeige die zufällig ausgewählten 8 GIFs an
+getRandomGifs().forEach(gif => placeGif(gif));
+
+
+
 </script>
 
 </body>
